@@ -1,6 +1,5 @@
 defmodule LogLevel do
   def to_label(level, legacy?) do
-    # Please implement the to_label/2 function
     cond do
       level == 0 && !legacy? -> :trace
       level == 1 -> :debug
