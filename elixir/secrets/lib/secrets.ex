@@ -22,7 +22,6 @@ defmodule Secrets do
   end
 
   def secret_xor(secret) do
-    # &(&1 ||| secret)
     &bxor(&1, secret)
   end
 
