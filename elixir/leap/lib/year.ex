@@ -17,6 +17,6 @@ defmodule Year do
     end
   end
 
-  def evenly_divisible?(dividend, divisor) when rem(dividend, divisor) == 0, do: true
-  def evenly_divisible?(_, _), do: false
+  defp evenly_divisible?(dividend, divisor) when rem(dividend, divisor) == 0, do: true
+  defp evenly_divisible?(_, _), do: false
 end
