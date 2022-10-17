@@ -6,8 +6,7 @@ defmodule RationalNumbers do
   """
   @spec add(a :: rational, b :: rational) :: rational
   def add({a1, b1}, {a2, b2}) do
-    {a1 * b2 + a2 * b1, b1 * b2}
-    |> reduce()
+    {a1 * b2 + a2 * b1, b1 * b2} |> reduce()
   end
 
   @doc """
@@ -15,8 +14,7 @@ defmodule RationalNumbers do
   """
   @spec subtract(a :: rational, b :: rational) :: rational
   def subtract({a1, b1}, {a2, b2}) do
-    {a1 * b2 - a2 * b1, b1 * b2}
-    |> reduce()
+    {a1 * b2 - a2 * b1, b1 * b2} |> reduce()
   end
 
   @doc """
@@ -24,8 +22,7 @@ defmodule RationalNumbers do
   """
   @spec multiply(a :: rational, b :: rational) :: rational
   def multiply({a1, b1}, {a2, b2}) do
-    {a1 * a2, b1 * b2}
-    |> reduce()
+    {a1 * a2, b1 * b2} |> reduce()
   end
 
   @doc """
@@ -33,8 +30,7 @@ defmodule RationalNumbers do
   """
   @spec divide_by(num :: rational, den :: rational) :: rational
   def divide_by({a1, b1}, {a2, b2}) do
-    {a1 * b2, a2 * b1}
-    |> reduce()
+    {a1 * b2, a2 * b1} |> reduce()
   end
 
   @doc """
@@ -42,8 +38,7 @@ defmodule RationalNumbers do
   """
   @spec abs(a :: rational) :: rational
   def abs({a, b}) do
-    {Kernel.abs(a), Kernel.abs(b)}
-    |> reduce()
+    {Kernel.abs(a), Kernel.abs(b)} |> reduce()
   end
 
   @doc """
@@ -51,14 +46,13 @@ defmodule RationalNumbers do
   """
   @spec pow_rational(a :: rational, n :: integer) :: rational
   def pow_rational({a, b}, n) when n > 0 do
-    {Integer.pow(a, n), Integer.pow(b, n)}
-    |> reduce()
+    {Integer.pow(a, n), Integer.pow(b, n)} |> reduce()
   end
 
   def pow_rational({a, b}, n) do
     n = Kernel.abs(n)
-    {Integer.pow(b, n), Integer.pow(a, n)}
-    |> reduce()
+
+    {Integer.pow(b, n), Integer.pow(a, n)} |> reduce()
   end
 
   @doc """
@@ -66,7 +60,7 @@ defmodule RationalNumbers do
   """
   @spec pow_real(x :: integer, n :: rational) :: float
   def pow_real(x, {a, b}) do
-    x ** (a/b)
+    x ** (a / b)
   end
 
   @doc """
@@ -74,6 +68,7 @@ defmodule RationalNumbers do
   """
   @spec reduce(a :: rational) :: rational
   def reduce({0, _}), do: {0, 1}
+
   def reduce({a, b}) when b < 0, do: reduce({-a, -b})
 
   def reduce({a, b}) do
