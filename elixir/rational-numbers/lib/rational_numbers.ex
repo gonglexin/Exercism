@@ -77,12 +77,7 @@ defmodule RationalNumbers do
   def reduce({a, b}) when b < 0, do: reduce({-a, -b})
 
   def reduce({a, b}) do
-    gcd = gcd({a, b}, min(Kernel.abs(a), Kernel.abs(b)))
+    gcd = Integer.gcd(a, b)
     {div(a, gcd), div(b, gcd)}
   end
-
-  defp gcd(_, 0), do: 1
-  defp gcd(_, 1), do: 1
-  defp gcd({a, b}, n) when rem(a, n) == 0 and rem(b, n) == 0, do: n
-  defp gcd({a, b}, n), do: gcd({a, b}, n - 1)
 end
