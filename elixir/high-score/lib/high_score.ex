@@ -12,7 +12,7 @@ defmodule HighScore do
   end
 
   def reset_score(scores, name) do
-    Map.update(scores, name, @initial_score, fn _ -> 0 end)
+    Map.put(scores, name, @initial_score)
   end
 
   def update_score(scores, name, score) do
