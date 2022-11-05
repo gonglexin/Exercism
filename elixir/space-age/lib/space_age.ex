@@ -9,13 +9,12 @@ defmodule SpaceAge do
           | :uranus
           | :neptune
 
-
-  @earth_year_seconds 31557600
+  @earth_year_in_seconds 31_557_600
 
   @ratio %{
     mercury: 0.2408467,
     venus: 0.61519726,
-    earth: 1,
+    earth: 1.0,
     mars: 1.8808158,
     jupiter: 11.862615,
     saturn: 29.447498,
@@ -27,10 +26,9 @@ defmodule SpaceAge do
   aged on 'planet', or an error if 'planet' is not a planet.
   """
   @spec age_on(planet, pos_integer) :: {:ok, float} | {:error, String.t()}
-  def age_on(planet, seconds) do
-    case Map.fetch(@ratio, planet) do
-      {:ok, ratio} -> {:ok, seconds / (ratio * @earth_year_seconds)}
-      :error -> {:error, "not a planet"}
-    end
+  def age_on(planet, seconds) when is_map_key(@ratio, planet) do
+    {:ok, seconds / (@ratio[planet] * @earth_year_in_seconds)}
   end
+
+  def age_on(_planet, _seconds), do: {:error, "not a planet"}
 end
