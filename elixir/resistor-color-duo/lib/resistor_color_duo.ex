@@ -17,11 +17,9 @@ defmodule ResistorColorDuo do
   """
   @spec value(colors :: [atom]) :: integer
   def value(colors) do
-    [first, second] =
-      colors
-      |> Enum.take(2)
-      |> Enum.map(fn color -> @colors[color] end)
-
-    first * 10 + second
+    colors
+    |> Enum.take(2)
+    |> Enum.map(&@colors[&1])
+    |> Integer.undigits()
   end
 end
