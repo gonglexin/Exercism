@@ -14,11 +14,10 @@ defmodule Username do
         ?ü -> 'ue'
         ?ß -> 'ss'
         ?_ -> l
-        l when l in 97..122 -> l
-        _   -> nil
+        l when l in ?a..?z -> l
+        _   -> ''
       end
     end)
-    |> Enum.reject(&is_nil/1)
     |> List.flatten()
   end
 end
