@@ -12,14 +12,12 @@ defmodule RotationalCipher do
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
     text
-    |> String.to_charlist()
-    |> Enum.map(fn c ->
-      case c do
-        c when c in @lower -> ?a + rem(c - ?a + shift, 26)
-        c when c in @upper -> ?A + rem(c - ?A + shift, 26)
-        _ -> c
-      end
-    end)
+    |> to_charlist()
+    |> Enum.map(&apply_shift(&1, shift))
     |> to_string()
   end
+
+  defp apply_shift(c, shift) when c in @lower, do: ?a + rem(c - ?a + shift, 26)
+  defp apply_shift(c, shift) when c in @upper, do: ?A + rem(c - ?A + shift, 26)
+  defp apply_shift(c, _shift), do: c
 end
