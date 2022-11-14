@@ -8,14 +8,10 @@ defmodule Sublist do
   def compare([], _), do: :sublist
 
   def compare(a, b) do
-    if String.contains?(Enum.join(b), Enum.join(a)) && Enum.all?(a, fn x -> x in b end) do
-      :sublist
-    else
-      if String.contains?(Enum.join(a), Enum.join(b)) && Enum.all?(b, fn x -> x in a end) do
-        :superlist
-      else
-        :unequal
-      end
+    cond do
+      String.contains?(Enum.join(a, "-") <> "-", Enum.join(b, "-") <> "-") -> :superlist
+      String.contains?(Enum.join(b, "-") <> "-", Enum.join(a, "-") <> "-") -> :sublist
+      true -> :unequal
     end
   end
 end
