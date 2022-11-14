@@ -2,6 +2,9 @@ defmodule RotationalCipher do
   @lower ?a..?z
   @upper ?A..?Z
 
+  @lower_index @lower |> Enum.with_index() |> Enum.into(%{})
+  @upper_index @upper |> Enum.with_index() |> Enum.into(%{})
+
   @doc """
   Given a plaintext and amount to shift by, return a rotated string.
 
@@ -15,8 +18,8 @@ defmodule RotationalCipher do
     |> String.to_charlist()
     |> Enum.map(fn c ->
       case c do
-        c when c in @lower -> @lower |> Stream.cycle() |> Enum.at(c - ?a + shift)
-        c when c in @upper -> @upper |> Stream.cycle() |> Enum.at(c - ?A + shift)
+        c when c in @lower -> @lower |> Enum.at(rem(@lower_index[c] + shift, 26))
+        c when c in @upper -> @upper |> Enum.at(rem(@upper_index[c] + shift, 26))
         _ -> c
       end
     end)
