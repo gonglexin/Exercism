@@ -8,13 +8,12 @@ defmodule WineCellar do
   end
 
   def filter(cellar, color, opts \\ []) do
-    year = opts[:year]
-    country = opts[:country]
-
     wines = Keyword.get_values(cellar, color)
 
-    wines = if year, do: filter_by_year(wines, year), else: wines
-    if country, do: filter_by_country(wines, country), else: wines
+    Enum.reduce(opts, wines, fn
+      {:year, year}, wines -> filter_by_year(wines, year)
+      {:country, country}, wines -> filter_by_country(wines, country)
+    end)
   end
 
   # The functions below do not need to be modified.
