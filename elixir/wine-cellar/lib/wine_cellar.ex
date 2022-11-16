@@ -18,14 +18,14 @@ defmodule WineCellar do
 
   # The functions below do not need to be modified.
 
-  def filter_by_year(wines, year)
-  def filter_by_year([], _year), do: []
+  defp filter_by_year(wines, year)
+  defp filter_by_year([], _year), do: []
 
-  def filter_by_year([{_, year, _} = wine | tail], year) do
+  defp filter_by_year([{_, year, _} = wine | tail], year) do
     [wine | filter_by_year(tail, year)]
   end
 
-  def filter_by_year([{_, _, _} | tail], year) do
+  defp filter_by_year([{_, _, _} | tail], year) do
     filter_by_year(tail, year)
   end
 
