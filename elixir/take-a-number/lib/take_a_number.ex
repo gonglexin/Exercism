@@ -1,6 +1,6 @@
 defmodule TakeANumber do
-  def start(state \\ 0) do
-    spawn(fn -> loop(state) end)
+  def start() do
+    spawn(fn -> loop(0) end)
   end
 
   defp loop(state) do
@@ -15,7 +15,7 @@ defmodule TakeANumber do
         loop(state)
 
       :stop ->
-        Process.exit(self(), :kill)
+        nil
 
       _ ->
         loop(state)
