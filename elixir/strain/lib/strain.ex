@@ -9,10 +9,9 @@ defmodule Strain do
   def keep([], _fun), do: []
 
   def keep([head | tail], fun) do
-    if fun.(head) do
-      [head | keep(tail, fun)]
-    else
-      keep(tail, fun)
+    case fun.(head) do
+      true -> [head | keep(tail, fun)]
+      false -> keep(tail, fun)
     end
   end
 
@@ -26,10 +25,9 @@ defmodule Strain do
   def discard([], _fun), do: []
 
   def discard([head | tail], fun) do
-    if fun.(head) do
-      discard(tail, fun)
-    else
-      [head | discard(tail, fun)]
+    case fun.(head) do
+      true -> discard(tail, fun)
+      false -> [head | discard(tail, fun)]
     end
   end
 end
