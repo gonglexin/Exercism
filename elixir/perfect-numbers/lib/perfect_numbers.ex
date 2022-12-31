@@ -10,7 +10,9 @@ defmodule PerfectNumbers do
   :deficient if the aliquot sum is less than `number`
   """
   @spec classify(number :: integer) :: {:ok, atom} | {:error, String.t()}
-  def classify(number) when is_integer(number) and number > 0 do
+  def classify(number) when number < 1, do: {:error, "Classification is only possible for natural numbers."}
+
+  def classify(number) when is_integer(number) do
     aliquot_sum =
       number
       |> get_factors()
@@ -22,8 +24,6 @@ defmodule PerfectNumbers do
       true -> {:ok, :deficient}
     end
   end
-
-  def classify(_number), do: {:error, "Classification is only possible for natural numbers."}
 
   @spec get_factors(number :: integer) :: list()
   defp get_factors(1), do: []
