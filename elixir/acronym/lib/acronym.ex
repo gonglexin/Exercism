@@ -7,7 +7,7 @@ defmodule Acronym do
   def abbreviate(string) do
     string
     |> String.split(~r/\s|-|_/)
-    |> Enum.map(&String.at(&1, 0))
+    |> Enum.map(&String.first/1)
     |> Enum.reject(&is_nil/1)
     |> Enum.map(&String.upcase/1)
     |> Enum.join()
