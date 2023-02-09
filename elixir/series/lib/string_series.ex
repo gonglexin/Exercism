@@ -5,14 +5,15 @@ defmodule StringSeries do
   return an empty list.
   """
   @spec slices(s :: String.t(), size :: integer) :: list(String.t())
+  def slices(_s, size) when size < 1, do: []
+
   def slices(s, size) do
     length = String.length(s)
     cond do
-      size < 1 or size > length -> []
+      size > length -> []
 
       true ->
         0..(length - size)
-        |> Enum.to_list
         |> Enum.map(fn index ->
           String.slice(s, index, size)
         end)
