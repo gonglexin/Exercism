@@ -34,8 +34,8 @@ defmodule Scrabble do
   @spec score(String.t()) :: non_neg_integer
   def score(word) do
     word
+    |> String.upcase()
     |> String.graphemes()
-    |> Enum.map(&String.upcase/1)
     |> Enum.reduce(0, fn letter, acc ->
       acc + Map.get(@letter_values, letter, 0)
     end)
