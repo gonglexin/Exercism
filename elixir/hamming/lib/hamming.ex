@@ -12,11 +12,22 @@ defmodule Hamming do
     {:error, "strands must be of equal length"}
   end
 
+  ## my solution
+  # def hamming_distance(strand1, strand2) do
+  #   distance =
+  #     strand1
+  #     |> Enum.with_index()
+  #     |> Enum.count(fn {char, index} -> Enum.at(strand2, index) != char end)
+  #
+  #   {:ok, distance}
+  # end
+
+  # a better solution
   def hamming_distance(strand1, strand2) do
     distance =
       strand1
-      |> Enum.with_index()
-      |> Enum.count(fn {char, index} -> Enum.at(strand2, index) != char end)
+      |> Enum.zip(strand2)
+      |> Enum.count(fn {nuc1, nuc2} -> nuc1 != nuc2 end)
 
     {:ok, distance}
   end
