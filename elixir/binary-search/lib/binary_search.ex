@@ -24,8 +24,6 @@ defmodule BinarySearch do
 
   defp do_search([], _key, _index), do: :not_found
 
-  defp do_search([key], key, index), do: {:ok, index}
-
   defp do_search([v], key, _index) when v != key, do: :not_found
 
   defp do_search(numbers, key, index) do
